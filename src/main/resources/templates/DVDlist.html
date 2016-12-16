@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>DVDs Available</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <style>
+     body {
+	
+	background-position: center;
+	background-attachment: fixed;
+	text-align:center;
+
+}
+
+    #header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:0px;
+    font-size: 40px;
+    font-weight: bold;
+    border-radius:0px;
+    
+    }
+    
+     #label {
+    background-color:white;
+    color:black;
+    background-position: center;
+    text-align:left;
+    filter: alpha(opacity=50);
+    font-size: 25px;
+    padding:15px;
+    font-weight: bold;
+    border-radius:0px;
+    width: 400px;
+    
+    }
+
+	table {
+    font-family: arial, sans-serif;
+    text-align:center;
+    border-collapse: collapse;
+    width: 100%;
+    color:black;
+    
+}
+	td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    
+}
+	tr:nth-child(even) {
+    background-color: white;
+}
+
+ #back{
+ 
+ 	width: 700px;
+ 	height:150px;
+ 	color:white;
+ 	background-color:black;
+	margin-right:auto;
+	margin-left:auto;
+	border-radius:25px;
+
+ }
+
+
+	</style>
+</head>
+
+<body>
+	<div id="header">
+<a th:inline="text"> "Welcome [[${#httpServletRequest.remoteUser}]]" </a>
+
+	</div><br/>
+	
+
+<div id="label">
+AVAILABLE MOVIES
+</div><br/>
+
+<table>	
+		<tr>
+		    <th>MOVIE NAME</th>
+		    <th>DIRECTOR</th>
+		    <th>DURATION</th>
+		    <th>CAST</th>
+		    <th>PRICE</th>
+		    <th>GENRE</th>  
+		</tr>  
+		
+    		<tr th:each="DVD : ${DVDs}">
+    		<td th:text="${DVD.title}"></td> 
+    		<td th:text="${DVD.director}"></td>
+    		<td th:text="${DVD.duration} "></td>
+    		<td th:text="${DVD.cast}"></td>
+    		<td th:text="${DVD.price}"></td>
+    		<td th:text="${DVD.genre.name}"></td> 		
+ 			<td><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/delete/{id}(id=${DVD.id})}">DELETE</a></td>    					
+    	</tr>
+     </table> <br/>
+     
+     	<form sec:authorize="hasAuthority('ADMIN')" th:action="@{/add}" method="post">
+			<input type="submit" value="ADD MOVIES" class="btn btn-danger"/>	
+		</form><br/>
+     
+<div id="label">
+MOVIES OUT FOR RENTAL
+</div>   <br/>  
+     <table>	
+		<tr>
+		    <th>MOVIE NAME</th>
+		    <th>DIRECTOR</th>
+		    <th>CAST</th>
+		    <th>RETURN DATE</th>
+		    <th><a sec:authorize="hasAuthority('ADMIN')" >PRICE</a></th> 
+		    <th><a sec:authorize="hasAuthority('ADMIN')" >MEMBERSHIP</a></th>   
+		</tr>  
+		
+    		<tr th:each="DVD1 : ${DVDs1}">
+    		<td th:text="${DVD1.title1}"></td> 
+    		<td th:text="${DVD1.director1}"></td>
+    		<td th:text="${DVD1.cast1} "></td>
+    		<td th:text="${DVD1.returndate}"></td>
+    		<td sec:authorize="hasAuthority('ADMIN')" th:text="${DVD1.price1}"></td>
+    		<td sec:authorize="hasAuthority('ADMIN')" th:text="${DVD1.memberStatus.name1}"></td> 			
+ 			<td><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/delete1/{id1}(id1=${DVD1.id1})}">DELETE</a></td>    		
+    	</tr>
+     </table> <br/>
+     
+   
+	
+
+	<form sec:authorize="hasAuthority('USER')" th:action="@{/add1}" method="post">
+			<input type="submit" value="SUBMIT RESERVATION" class="btn btn-danger"/>	
+		</form><br/>
+ 
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-danger"/>	
+		</form><br/>
+
+ 
+
+</body>
+</html>

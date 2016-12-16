@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>DVD Add</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+  body {
+	
+	background-position: center;
+	background-attachment: fixed;
+	text-align:center;
+	font-weight: bold;
+	font-size: 15px;
+ 
+ }
+    
+    #header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:0px;
+    font-size: 40px;
+    font-weight: bold;
+    border-radius:0px;
+    
+    }
+    
+        input[type=text] {
+
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 5px;
+    border-color: black;
+    background-color: black;
+    opacity: 0.5;
+    color: white;
+}
+
+    input[type=password] {
+
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 5px;
+    border-color: black;
+    background-color: black;
+    opacity: 0.5;
+    color: white;
+}
+
+	label, input {
+	display: inline-block;
+    width: 200px;
+    text-align: left;
+
+}
+
+
+
+	</style>
+</head>
+<body>
+<div id="header">
+	ADD DVD
+</div>
+
+
+	<div>
+		<form th:object="${DVD}" th:action="@{save}" action="#" method="post">
+		  	<label for="title">TITLE</label>
+			<input type="text" id="title" th:field="*{title}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="director">DIRECTOR </label>
+			<input type="text" id="director" th:field="*{director}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="duration">DURATION</label>
+			<input type="text" id="duration" th:field="*{duration}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="cast">CAST</label>
+			<input type="text" id="cast" th:field="*{cast}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="price">PRICE </label>
+			<input type="text" id="price" th:field="*{price}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>						
+		  	<label for="catlist">GENRE</label>
+			 <select id="catlist" th:field="*{genre}" class="form-control">
+       			<option th:each="genre: ${genre}" th:value="${genre.genreid}" th:text="${genre.name}"></option>
+    		</select>
+    		
+		
+			<div style="clear: both; display: block; height: 10px; text-align: center;"></div>
+			<input type="submit" value="Save"></input>
+		</form>
+		<form th:action="@{/DVDlist}" method="post">
+			<input type="submit" value="Back" class="btn btn-danger"/>	
+		</form></div>
+		
+</body>
+</html>

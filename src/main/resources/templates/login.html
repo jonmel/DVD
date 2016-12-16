@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>DVD Booking</title>
+           <style>
+           
+    body {
+	
+	background-position: center;
+	background-attachment: fixed;
+	text-align:center;
+	font-weight: bold;
+	color:black;
+	font-size: 30px;
+		
+}
+	#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:30px;
+    filter: alpha(opacity=50);
+    font-size: 40px;
+    font-weight: bold;
+
+    
+    }
+    
+    input[type=text] {
+
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 5px;
+    border-color: black;
+    background-color: black;
+    opacity: 0.5;
+    color: white;
+
+}
+
+    input[type=password] {
+
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 5px;
+    border-color: black;
+    background-color: black;
+    opacity: 0.5;
+    color: white;
+}
+     a:link, a:visited {
+    background-color: black;
+    color: white;
+    padding: 10px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    
+}
+
+label, input {
+  display: inline-block;
+    width: 200px;
+    text-align: left;
+}
+	
+	</style>
+    </head>
+    
+    <body>
+    <div id="header">
+	MOVIE RENTAL
+	</div>
+	<br/><br/><br/>
+	
+     <div class="col-md-4 col-md-offset-4">
+        <div class="alert alert-danger" th:if="${param.error}">
+          INVALID USERNAME AND PASSWORD
+        </div>
+        <div class="alert alert-warning" th:if="${param.logout}">
+            YOU HAVE BEEN LOG OUT
+        </div>
+        <form th:action="@{/login}" method="post">
+            <div><label> USERNAME </label><input type="text" name="username" class="form-control" value="ENTER USERNAME"/></div>
+            <div><label> PASSWORD </label><input type="password" name="password" class="form-control" value="PASSWORDPASSWORD"/></div>
+            <div><input type="submit" value="Sign In" class="btn btn-success"/></div>
+        </form><br/><br/><br/>
+       
+		
+		<a th:href="@{/signup}">New User Sign Up!!</a><br/><br/>
+      
+       </div>
+    </body>
+</html>

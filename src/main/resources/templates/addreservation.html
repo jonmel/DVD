@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add reservation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+  body {
+	
+	background-position: center;
+	background-attachment: fixed;
+	text-align:center;
+	font-weight: bold;
+	font-size: 15px;
+	
+	
+}
+  
+    #header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:0px;
+    font-size: 40px;
+    font-weight: bold;
+    border-radius:0px;
+    
+    }
+    
+      #label {
+    background-color:white;
+    color:black;
+    text-align:left;
+    padding:15px;
+    font-size: 25px;
+    font-weight: bold;
+    border-radius:0px;
+    
+    }
+    
+    	table {
+    font-family: arial, sans-serif;
+    text-align:center;
+    border-collapse: collapse;
+    width: 100%;
+    color:black;
+    
+}
+	td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    
+}
+	tr:nth-child(even) {
+    background-color: white;
+}
+    
+label, input {
+  display: inline-block;
+    width: 200px;
+    text-align: left;
+}
+
+	</style>
+</head>
+<body>
+<div id="header">
+	ADD RESERVATION
+</div><br/><br/>
+
+<div id="label">
+AVAILABLE MOVIES
+</div><br/><br/>
+
+<table>	
+		<tr>
+		    <th>MOVIE NAME</th>
+		    <th>DIRECTOR</th>
+		    <th>DURATION</th>
+		    <th>CAST</th>
+		    <th>PRICE</th>
+		    <th>GENRE</th>  
+		</tr>  
+		
+    		<tr th:each="DVD : ${DVDs}">
+    		<td th:text="${DVD.title}"></td> 
+    		<td th:text="${DVD.director}"></td>
+    		<td th:text="${DVD.duration} "></td>
+    		<td th:text="${DVD.cast}"></td>
+    		<td th:text="${DVD.price}"></td>
+    		<td th:text="${DVD.genre.name}"></td> 		
+ 			
+    	</tr>
+     </table> <br/><br/>
+     
+     <div id="label" style="text-align: center;">
+	Fill out reservation below:
+	</div><br/>
+	<div>
+		<form th:object="${DVD1}" th:action="@{/save1}" action="#" method="post">
+		  	<label for="title1">MOVIE NAME</label>
+			<input type="text" id="title1" th:field="*{title1}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="director1">DIRECTOR </label>
+			<input type="text" id="director1" th:field="*{director1}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="cast">CAST </label>
+			<input type="text" id="cast1" th:field="*{cast1}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="returndate">RETURN DATE </label>
+			<input type="text" id="returndate" th:field="*{returndate}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="price1">PRICE</label>
+			<input type="text" id="price1" th:field="*{price1}" />
+
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Save"></input>
+		</form>
+		<form th:action="@{/DVDlist}" method="post">
+			<input type="submit" value="Back" class="btn btn-danger"/>	
+		</form></div>
+
+</body>
+</html>
